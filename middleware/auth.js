@@ -6,7 +6,7 @@ function auth(req,res,next) {
         if(!token) return res.status(401).json({ errorMessage:"Unauthorized"});
 
         const verified = jwt.verify(token, process.env.JWT_SECRET);
-        
+        //dont need it now but this is how u can get the user becoz in payload u kept the mongodb id
         req.user = verified.user;
 
         next();

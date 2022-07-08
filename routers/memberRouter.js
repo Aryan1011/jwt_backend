@@ -1,15 +1,15 @@
 const router = require("express").Router();
-const Customer = require("../models/customerModel");
+const Member = require("../models/memberModel");
 const auth =require("../middleware/auth");
 
 router.post("/", auth ,async (req,res)=>{
     try{
         const {name} = req.body;
-        const newCustomer = new Customer({
+        const newMember = new Member({
             name
         });
-        const savedCustomer = await newCustomer.save();
-        res.json(savedCustomer);
+        const savedMember = await newMember.save();
+        res.json(savedMember);
     }
     catch(err){
         console.error(err);
@@ -19,8 +19,8 @@ router.post("/", auth ,async (req,res)=>{
 
 router.get("/",auth, async (req,res)=>{
     try{
-       const customers = await Customer.find();
-       res.json(customers);
+       const members = await Member.find();
+       res.json(members);
     }
     catch(err){
         console.error(err);
