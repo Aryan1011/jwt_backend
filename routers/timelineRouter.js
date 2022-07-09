@@ -1,15 +1,15 @@
 const router = require("express").Router();
-const Member = require("../models/memberModel");
+const Timeline = require("../models/timelineModel");
 const auth =require("../middleware/auth");
 
 router.post("/", auth ,async (req,res)=>{
     try{
         const {name} = req.body;
-        const newMember = new Member({
+        const newTimeline = new Timeline({
             name
         });
-        const savedMember = await newMember.save();
-        res.json(savedMember);
+        const savedTimeline = await newTimeline.save();
+        res.json(savedTimeline);
     }
     catch(err){
         console.error(err);
@@ -19,8 +19,8 @@ router.post("/", auth ,async (req,res)=>{
 
 router.get("/",auth, async (req,res)=>{
     try{
-       const members = await Member.find();
-       res.json(members);
+       const timelines = await Timeline.find();
+       res.json(timelines);
     }
     catch(err){
         console.error(err);

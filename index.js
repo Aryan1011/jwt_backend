@@ -29,4 +29,4 @@ mongoose.connect(process.env.MDB_CONNECT,{
 // set up routes
 
 app.use("/auth",require("./routers/userRouter"));
-app.use("/member",require("./routers/memberRouter"));
+app.use("/timeline",require("./routers/timelineRouter"));
