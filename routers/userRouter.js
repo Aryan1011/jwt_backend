@@ -7,10 +7,10 @@ const jwt = require("jsonwebtoken");
 //register
 router.post("/", async (req, res) => {
     try {
-        const { email, password, passwordVerify } = req.body;
+        const { email, name, batch, branch, phone, about, password, passwordVerify } = req.body;
 
         //validation
-        if (!email || !password || !passwordVerify)
+        if (!email || !name || !batch || !branch || !phone || !about || !password || !passwordVerify)
             return res.status(400)
                 .json({ errorMessage: "Please Enter all required fields." });
 
@@ -37,7 +37,7 @@ router.post("/", async (req, res) => {
         // save a new user account to thte db
 
         const newUser = new User({
-            email, passwordHash
+            email, name, batch, branch, phone, about, passwordHash
         })
 
         const savedUser = await newUser.save();
@@ -106,6 +106,7 @@ router.post("/login", async (req, res) => {
     }
 })
 
+// set cookie expire
 router.get("/logout",(req,res)=>{
     res.cookie("token","",{
         httpOnly:true,
@@ -114,6 +115,7 @@ router.get("/logout",(req,res)=>{
     .send();
 });
 
+// is the token with you valid
 router.get("/loggedIn",(req,res)=>{
     try{
         const token =  req.cookies.token;
